@@ -13,4 +13,14 @@
               </time>
         </p>
     </header>
+    <p>
+        {{post.text|truncatewords:20}}
+
+    </p>
+    <p>
+      <a href="">Read more &hellip;</a>
+    </p>
 </article>
+{% empty %}
+<p><em>No Blog Posts Available</em></p>
+{% endfor %}

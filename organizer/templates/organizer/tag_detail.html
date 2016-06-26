@@ -1,4 +1,6 @@
-<h2>{{tag.name| title}}</h2>
+{% block title %}
+{{block.super }}-{{tag.name| title}}
+{% endblock %}
  <!--
           1) Tag model object, creatively named tag
         2 )Double brackets are called delimiters, they help django know whether it

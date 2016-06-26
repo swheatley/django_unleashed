@@ -1,21 +1,25 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+
+{% block title %}
+{{block.super}}-Tag List
+{% endblock %}
+
+{% block content %}
+
 <h2>Tag List</h2>
-
-{% if tag_list %}
-
 <ul>
     {% for tag in tag_list %}
   <li>
     <a href="#">
-        {tag.name|title}</a>
+        {{tag.name | title}}</a>
 
   </li>
   {% empty %}
+     {#  Using empty allows the check to be done by the for loop resulting in shorter code and less processing #}
+     {#  Empty tag infers scope from the endfor tag and does not require its own closing tag #}
   <li><em>There are currently no Tags available.</em></li>
   {% endfor  %}
 
 </ul>
-{% else %}
 
-<p><em>There are currently no Tags available</em></p>
-
-{% endif   %}
+{% endblock %}

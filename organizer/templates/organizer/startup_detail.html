@@ -1,3 +1,4 @@
+{% extends parent_template|default:"base.html" %}
 <article>
   <h2>{{startup.name }}</h2>
   <dl>
@@ -14,7 +15,7 @@
     </dl>
 
     <p>
-        {{startup.description}}
+        {{startup.description | linebreaks}}
     </p>
         {% if startup.newslink_set.all %}
           <section>
@@ -37,7 +38,7 @@
                 {% for post in startup.blog_posts.all %}
                 <li>
                   <a href="">
-                    {{post.title|title}}</a>
+                    {{post.title | title}}</a>
                 </li>
               </ul>
           </section>
