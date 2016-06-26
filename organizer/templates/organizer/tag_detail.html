@@ -1,4 +1,65 @@
-<h2></h2>
-
+<h2>{{tag.name| title}}</h2>
+ <!--
+          1) Tag model object, creatively named tag
+        2 )Double brackets are called delimiters, they help django know whether it
+        should access the text  or leave it alone
+        3) If you are missing a value in your template, it is either because you've coded the
+            wrong variable name or the value is empty
+        4) Templating language Jinja2 does not have escape values by default
+        5) {{  }}  - variables
+          {%   %}   -  logic / expression
+        {#   #}  - comments.  Not appear in output of rendered template
+        { variable | filter } template fitlers.  Allow developers to sort modify and count
+       use title over capfirst
+ -->
+{% if tag.startup_set.all  %}
 <section>
-  <h3>Startups</h3>
+  <h3>Startup</h3>
+  <p>
+      Tag is associated with
+      {{ tag.startup_set.count }}
+      startup{{tag.startup_set.count | pluralize}}.
+  </p>
+
+  <ul>
+
+         {% for startup in tag.startup_set.all %}
+
+
+         <li><a href="">
+
+          {{ startup.name }}
+
+
+
+         </a></li>
+
+
+         {% endfor %}
+
+
+
+  </ul>
+
+</section>
+
+{% endif %}
+
+{% if tag.blog_posts.all  %}
+<section>
+<h3>Blog Posts{{tag.blog_posts.count | pluralize}}</h3>
+<ul>
+    {% for post in tag.blog_posts.all  %}
+    <li><a href="#">
+      {{post.title | title}}
+
+
+    </a></li>
+    {% endfor %}
+    </ul>
+</section>
+{% endif  %}
+
+{% if not tag.startup_set.all and not tag.blog_posts.all  %}
+  <p>This tag is not related to nay content</p>
+{% endif  %}
